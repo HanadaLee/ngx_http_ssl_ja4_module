@@ -128,36 +128,35 @@ index 05255d7..71bb9d0 100644
  
      ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0, "SSL_do_handshake: %d", n);
 diff --git a/src/event/ngx_event_openssl.h b/src/event/ngx_event_openssl.h
-index aa00e06..a8c44a5 100644
+index aa00e06..f9ff965 100644
 --- a/src/event/ngx_event_openssl.h
 +++ b/src/event/ngx_event_openssl.h
-@@ -147,6 +147,25 @@ struct ngx_ssl_connection_s {
-     unsigned                    early_preread:1;
-     unsigned                    write_blocked:1;
-     unsigned                    sni_accepted:1;
-+
+@@ -131,6 +131,24 @@ struct ngx_ssl_connection_s {
+ 
+     u_char                      early_buf;
+ 
 +    // ja4
-+    int             version;
-+    int             highest_supported_tls_client_version;
++    int                         version;
++    int                         highest_supported_tls_client_version;
 +
-+    size_t          ciphers_sz;
-+    char **ciphers;
++    size_t                      ciphers_sz;
++    char                      **ciphers;
 +
-+    size_t          extensions_sz;
-+    char **extensions;
++    size_t                      extensions_sz;
++    char                      **extensions;
 +
-+    size_t          sigalgs_sz;
-+    char   **sigalgs_hash_values; // Array to store combined hash values like 0x0601
-+    char *first_alpn; // first ALPN protocol provided by the client
-+
++    size_t                      sigalgs_sz;
++    char                      **sigalgs_hash_values; // Array to store combined hash values like 0x0601
++    char                       *first_alpn; // first ALPN protocol provided by the client
 +
 +    // ja4l
-+    uint16_t handshake_roundtrip_microseconds; // a whole number - max is probably thousands
-+    uint8_t ttl; // time to live - a whole number - max is 255
- };
- 
- 
-@@ -400,4 +419,6 @@ extern int  ngx_ssl_client_hello_arg_index;
++    uint16_t                    handshake_roundtrip_microseconds; // a whole number - max is probably thousands
++    uint8_t                     ttl; // time to live - a whole number - max is 255
++
+     unsigned                    handshaked:1;
+     unsigned                    handshake_rejected:1;
+     unsigned                    renegotiation:1;
+@@ -400,4 +418,6 @@ extern int  ngx_ssl_client_hello_arg_index;
  extern u_char  ngx_ssl_session_buffer[NGX_SSL_MAX_SESSION_SIZE];
  
  
